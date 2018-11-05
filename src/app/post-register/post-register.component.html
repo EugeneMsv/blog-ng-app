@@ -1,0 +1,18 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>{{postRegister.preview}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions class="flex">
+    <span class="spacer"></span>
+    <mat-icon class="icon">visibility</mat-icon>
+    <span>{{postRegister.views}}</span>
+    <mat-icon class="icon">favorite</mat-icon>
+    <span>{{postRegister.likes}}</span>
+    <mat-icon class="icon">comment</mat-icon>
+    <span>{{postRegister.commentsNum}}</span>
+  </mat-card-actions>
+  <mat-card-footer class="flex">
+    <span class="spacer"></span>
+    <span>{{postRegister.createdTime.toDateString()}}</span>
+  </mat-card-footer>
+</mat-card>
