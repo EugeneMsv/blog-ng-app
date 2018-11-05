@@ -14,12 +14,6 @@ export class PostRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.postRegister = new PostRegister();
-    this.postRegister.preview="bla bla";
-    this.postRegister.commentsNum=1235;
-    this.postRegister.likes=1235;
-    this.postRegister.views=1235;
-    this.postRegister.createdTime=new Date();
   }
 
 }

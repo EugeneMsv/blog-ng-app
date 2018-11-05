@@ -1,5 +1,6 @@
 <p>
   post-registers works!
 </p>
-
-<app-post-register postRegister=""></app-post-register>
+<div *ngFor="let postRegister of postRegisterList">
+  <app-post-register [postRegister]="postRegister"></app-post-register>
+</div>

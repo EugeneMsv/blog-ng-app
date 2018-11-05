@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PostRegisterCrudService} from "../service/post-register-crud.service";
+import {PostRegister} from "../model/post-register";
 
 @Component({
   selector: 'app-post-register-list',
@@ -7,6 +8,9 @@ import {PostRegisterCrudService} from "../service/post-register-crud.service";
   styleUrls: ['./post-register-list.component.less']
 })
 export class PostRegisterListComponent implements OnInit {
+
+  postRegisterList: PostRegister[];
+
   private postRegisterService: PostRegisterCrudService;
 
   constructor(postRegisterService: PostRegisterCrudService) {
@@ -14,7 +18,7 @@ export class PostRegisterListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.postRegisterService.print();
+    this.postRegisterList = this.postRegisterService.getPage()
   }
 
 }
