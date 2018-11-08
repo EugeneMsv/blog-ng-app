@@ -1,6 +1,17 @@
 <p>
   post-registers works!
 </p>
-<div *ngFor="let postRegister of postRegisterList">
-  <app-post-register [postRegister]="postRegister"></app-post-register>
+<div>
+  <ul class="post-registers">
+    <li *ngFor="let postRegister of postRegisterPage.content" (mouseover)="onMouseOver(postRegister)"
+        [class.selected]="postRegister === selectedPostRegister">
+      <app-post-register [postRegister]="postRegister"></app-post-register>
+    </li>
+  </ul>
+
+  <mat-paginator [length]="postRegisterPage.totalElements"
+                 [pageSize]="postRegisterPage.size"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="onPageEvent($event)">
+  </mat-paginator>
 </div>

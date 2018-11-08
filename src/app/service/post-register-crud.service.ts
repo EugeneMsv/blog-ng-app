@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PostRegister} from "../model/post-register";
+import {PostRegisterPage} from "../model/postRegisterPage";
 
 @Injectable({
   providedIn: 'root'
@@ -13,24 +14,26 @@ export class PostRegisterCrudService {
     this.httpClient = httpClient;
   }
 
+  public getPage(): PostRegisterPage {
 
-  print() {
-    console.log("Bla")
+    let page: PostRegisterPage = new PostRegisterPage();
+    for (let i = 0; i < 10; i++) {
+      let postRegister: PostRegister = new PostRegister();
+      postRegister.createdTime = new Date();
+      postRegister.views = this.getRandomNumber();
+      postRegister.commentsNum = this.getRandomNumber();
+      postRegister.likes = this.getRandomNumber();
+      page.content.push(postRegister);
+    }
+
+    page.totalPages = 10;
+    page.totalElements = 100;
+    page.size = 10;
+    page.number = 1;
+    return page;
   }
 
-  getPage(): PostRegister[] {
-    let postRegister1 = new PostRegister();
-    postRegister1.createdTime = new Date();
-    postRegister1.views = Math.random();
-    postRegister1.commentsNum = Math.random();
-    postRegister1.likes = Math.random();
-
-    let postRegister2 = new PostRegister();
-    postRegister2.createdTime = new Date();
-    postRegister2.views = Math.random();
-    postRegister2.commentsNum = Math.random();
-    postRegister2.likes = Math.random();
-
-    return [postRegister1, postRegister2];
+  private getRandomNumber(): number {
+    return Math.floor(Math.random() * 10000);
   }
 }

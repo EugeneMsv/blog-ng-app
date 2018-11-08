@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PostRegisterComponent } from './post-register/post-register.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PostRegisterComponent } from './post-register/post-register.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
