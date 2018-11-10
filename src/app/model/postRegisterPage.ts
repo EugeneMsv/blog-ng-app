@@ -1,7 +1,5 @@
-import {Pageable} from "./pageable";
-import {PostRegister} from "./post-register";
+import {Pageable} from './base/pageable';
+import {PostRegister} from './post-register';
 
-export class PostRegisterPage extends Pageable {
-
-  content: Array<PostRegister> = [];
+export class PostRegisterPage extends Pageable<PostRegister> {
 }
