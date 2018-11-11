@@ -17,8 +17,7 @@ export class PostRegisterListComponent implements OnInit {
 
   selectedPostRegister: PostRegister;
 
-  // todo получать с бека
-  pageSizeOptions: Array<number> = [5, 10, 20, 30];
+  pageSizeOptions: Array<number>;
 
   private postRegisterFilterService: PostRegisterFilterService;
 
@@ -27,22 +26,32 @@ export class PostRegisterListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.postRegisterPage = this.getPageData(null);
+    this.postRegisterFilterService.getPageSizeOptions()
+      .subscribe(options => this.pageSizeOptions = options);
+    this.requestPageData(this.defaultPage());
   }
 
-  // todo передавать параметры стрницы
-  private getPageData(pageRequest: PostRegisterPageRequest): PostRegisterPage {
-    return this.postRegisterFilterService.getPage(pageRequest);
+  private requestPageData(pageRequest: PostRegisterPageRequest): void {
+    this.postRegisterFilterService.getPage(pageRequest)
+      .subscribe(pageData => this.postRegisterPage = pageData);
   }
 
+  private defaultPage(): PostRegisterPageRequest {
+    return this.postRegisterFilterService.buildDefaultRequest();
+  }
 
   onPageEvent(event: PageEvent) {
-    this.postRegisterPage = this.getPageData(null);
+    console.log(event);
+    this.requestPageData(this.convertPageEventToPageRequest(event));
+  }
+
+  private convertPageEventToPageRequest(event: PageEvent): PostRegisterPageRequest {
+    Validate.isDefined(event, 'Page event must be set for conversion');
+    return new PostRegisterPageRequest(event.pageIndex, event.pageSize);
   }
 
   onMouseOver(selectedPostRegister: PostRegister) {
     this.selectedPostRegister = selectedPostRegister;
   }
-
 
 }

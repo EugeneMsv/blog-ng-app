@@ -4,11 +4,14 @@ import {PostRegister} from '../model/post-register';
 import {PostRegisterPage} from '../model/postRegisterPage';
 import {PostRegisterPageRequest} from './model/post-register-page-request';
 import {Validate} from './utils/validate';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostRegisterFilterService {
+
+  private static readonly pageSizeOptions: Array<number> = [5, 10, 20];
 
   private httpClient: HttpClient;
 
@@ -16,8 +19,15 @@ export class PostRegisterFilterService {
     this.httpClient = httpClient;
   }
 
-  public getPage(pageRequest: PostRegisterPageRequest): PostRegisterPage {
-    Validate.isDefined(pageRequest, 'PostRegisterPageRequest must be set');
+  public buildDefaultRequest(): PostRegisterPageRequest {
+    return new PostRegisterPageRequest(0, 10);
+  }
+
+  public getPage(pageRequest: PostRegisterPageRequest): Observable<PostRegisterPage> {
+    Validate.isDefined(pageRequest, 'PostRegisterPageRequest must be set for');
+    Validate.isTrue(PostRegisterFilterService.pageSizeOptions.includes(pageRequest.pageSize),
+      'Allowed only {0} page size', PostRegisterFilterService.pageSizeOptions);
+
     const page: PostRegisterPage = new PostRegisterPage();
     for (let i = 0; i < 10; i++) {
       const postRegister: PostRegister = new PostRegister();
@@ -32,7 +42,11 @@ export class PostRegisterFilterService {
     page.totalElements = 100;
     page.size = 10;
     page.number = 1;
-    return page;
+    return of(page);
+  }
+
+  public getPageSizeOptions(): Observable<Array<number>> {
+    return of(PostRegisterFilterService.pageSizeOptions);
   }
 
   private getRandomNumber(): number {
