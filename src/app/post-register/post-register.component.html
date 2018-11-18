@@ -13,6 +13,6 @@
   </mat-card-actions>
   <mat-card-footer class="flex">
     <span class="spacer"></span>
-    <span>{{postRegister.createdTime.toDateString()}}</span>
+    <span>{{postRegister.createdTime |  date:'yyyy-MM-dd HH:mm:ss'}}</span>
   </mat-card-footer>
 </mat-card>

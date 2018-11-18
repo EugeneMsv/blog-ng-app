@@ -28,21 +28,15 @@ export class PostRegisterListComponent implements OnInit {
   ngOnInit() {
     this.postRegisterFilterService.getPageSizeOptions()
       .subscribe(options => this.pageSizeOptions = options);
-    this.requestPageData(this.defaultPage());
-  }
-
-  private requestPageData(pageRequest: PostRegisterPageRequest): void {
-    this.postRegisterFilterService.getPage(pageRequest)
-      .subscribe(pageData => this.postRegisterPage = pageData);
-  }
-
-  private defaultPage(): PostRegisterPageRequest {
-    return this.postRegisterFilterService.buildDefaultRequest();
+    this.requestPageData(this.defaultPageRequest());
   }
 
   onPageEvent(event: PageEvent) {
-    console.log(event);
     this.requestPageData(this.convertPageEventToPageRequest(event));
+  }
+
+  onMouseOver(selectedPostRegister: PostRegister) {
+    this.selectedPostRegister = selectedPostRegister;
   }
 
   private convertPageEventToPageRequest(event: PageEvent): PostRegisterPageRequest {
@@ -50,8 +44,13 @@ export class PostRegisterListComponent implements OnInit {
     return new PostRegisterPageRequest(event.pageIndex, event.pageSize);
   }
 
-  onMouseOver(selectedPostRegister: PostRegister) {
-    this.selectedPostRegister = selectedPostRegister;
+  private requestPageData(pageRequest: PostRegisterPageRequest): void {
+    this.postRegisterFilterService.getPage(pageRequest)
+      .subscribe(pageData => this.postRegisterPage = pageData);
+  }
+
+  private defaultPageRequest(): PostRegisterPageRequest {
+    return this.postRegisterFilterService.buildDefaultRequest();
   }
 
 }

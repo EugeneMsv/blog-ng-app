@@ -1,11 +1,20 @@
 export class PageRequest {
 
-  readonly pageNumber: number;
+  private readonly _page: number;
 
-  readonly pageSize: number;
+  private readonly _size: number;
 
-  constructor(pageNumber: number, pageSize: number) {
-    this.pageNumber = pageNumber;
-    this.pageSize = pageSize;
+  constructor(page: number, size: number) {
+    this._page = page;
+    this._size = size;
+  }
+
+
+  get page(): number {
+    return this._page;
+  }
+
+  get size(): number {
+    return this._size;
   }
 }

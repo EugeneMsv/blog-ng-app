@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PostRegister} from "../model/post-register";
+import {PostRegister} from '../model/post-register';
 
 @Component({
   selector: 'app-post-register',

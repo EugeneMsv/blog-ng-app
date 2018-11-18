@@ -1,8 +1,8 @@
 <p>
   post-registers works!
 </p>
-<div>
-  <ul class="post-registers">
+<div *ngIf="postRegisterPage; else loading">
+  <ul class="post-registers" >
     <li *ngFor="let postRegister of postRegisterPage.content" (mouseover)="onMouseOver(postRegister)"
         [class.selected]="postRegister === selectedPostRegister">
       <app-post-register [postRegister]="postRegister"></app-post-register>
@@ -15,3 +15,4 @@
                  (page)="onPageEvent($event)">
   </mat-paginator>
 </div>
+<ng-template #loading>Loading Post Data...</ng-template>

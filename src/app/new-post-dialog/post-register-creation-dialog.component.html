@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <p>Введите превью нового поста</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="dialogData.preview">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Отменить</button>
+  <button mat-button [mat-dialog-close]="dialogData.preview" cdkFocusInitial>Создать</button>
+</div>
